@@ -23,7 +23,7 @@
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '288404690470754');
-  fbq('track', 'PageView');
+  /* PageView removido: o GTM-MK7SRXJ9 ja dispara PageView do pixel nesta pagina (evita duplicidade) */
   fbq('trackCustom', 'Lead_qualificado_geral');
   fbq('trackCustom', 'Lead_qualificado_FAP05');
   </script>
@@ -302,6 +302,13 @@
         });
       });
     })();
+  </script>
+  <script>
+  /* Conversao Meta: clique no WhatsApp = Contact (pixel vem via GTM) */
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a[href*="wa.me"]') : null;
+    if (a && typeof fbq === 'function') fbq('track', 'Contact');
+  });
   </script>
 </body>
 </html>
